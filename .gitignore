@@ -56,3 +56,4 @@ fabric.properties
 *.DS_Store
 *.log
 *.out
+Crawler/model/settings.py
