@@ -18,10 +18,10 @@ class CrawlerPipeline(object):
     
     def process_item(self, item, spider):
         session = self.Session()
-        if item['thumbnail'] is not None and item['productNo'] in self.productNo_set:
+        if item.get('thumbnail') is None or item.get('productNo') in self.productNo_set:
             raise DropItem("Duplicate item found: %s" % item)
         else:
-            self.productNo_set.add(item['productNo'])
+            self.productNo_set.add(item.get('productNo'))
             product = Product(**item)
             
             try:
