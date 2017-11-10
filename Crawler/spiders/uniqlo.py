@@ -13,6 +13,20 @@ class UniqloSpider(CrawlSpider):
         'http://www.uniqlo.kr/display/displayShop.lecs?storeNo=22&siteNo=9&displayNo=UQ1A01A07'
         '&displayMallNo=UQ1&tracking=header_logo&stonType=P']
     
+    custom_settings = {
+        'SPLASH_URL': 'http://192.168.99.100:8050/',
+        'DUPEFILTER_CLASS': 'scrapy_splash.SplashAwareDupeFilter',
+        'HTTPCACHE_STORAGE': 'scrapy_splash.SplashAwareFSCacheStorage',
+        'DOWNLOADER_MIDDLEWARES': {
+            'scrapy_splash.SplashCookiesMiddleware': 723,
+            'scrapy_splash.SplashMiddleware': 725,
+            'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+        },
+        'SPIDER_MIDDLEWARES': {
+            'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
+        }
+    }
+    
     item_fields = {
         'title': '//h2[@id="goodsNmArea"]//text()',
         'productNo': '//li[@class="number"]//text()',
