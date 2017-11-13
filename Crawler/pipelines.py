@@ -7,6 +7,7 @@
 from sqlalchemy.orm import sessionmaker
 from scrapy.exceptions import DropItem
 from Crawler.model.models import Product, db_connect, create_deals_table
+from Crawler.util.common import check_essential_element
 
 
 class CrawlerPipeline(object):
@@ -18,7 +19,7 @@ class CrawlerPipeline(object):
     
     def process_item(self, item, spider):
         session = self.Session()
-        if item.get('thumbnail') is None or item.get('productNo') in self.productNo_set:
+        if check_essential_element(item) or item.get('productNo') in self.productNo_set:
             raise DropItem("Duplicate item found: %s" % item)
         else:
             self.productNo_set.add(item.get('productNo'))
