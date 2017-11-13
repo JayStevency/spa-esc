@@ -15,16 +15,18 @@ class Forever21Spider(CrawlSpider):
         'title': '//h1[@class="item_name_p"]/text()',
         'productNo': '/html/head/meta[@property="og:url"]/@content',
         'thumbnail': '//*[@id="ctl00_MainContent_productImage"]/@src',
-        'price': '//*[@id="spanProductPrice"]/text()',
+        'price': '//*[@id="spanProductPrice"]/text() | //*[@id="spanProductPrice"]/span[1]/text()',
+        'salePrice': '//*[@id="spanProductPrice"]/span[2]/text()',
         'originalSizeLabel': '//*[@id="ulProductSize"]/li/label/text()',
         'color': '//*[@id="spanSelectedColorName"]/text()',
-        'material': '//*[@id="aspnetForm"]/div[3]/div[4]/div/section/div/article/div/div[1]/p/text()',
+        'material': '//div[@class="itemdetailcontent"]/p[text()[contains(., "FABRIC")]]/text()',
         'category': '//*[@id="div_breadcrumb"]/a[3]/u/text()'
     }
     
     rules = (
         Rule(LinkExtractor(allow=('productid', 'ProductID')), callback='parse_item', follow=True),
-        Rule(LinkExtractor(allow=('category',), deny=('br=acc', 'br=shoesnbag', 'br=f21_acc', 'br=f21_shoesnbag')),
+        Rule(LinkExtractor(allow=('category',),
+                           deny=('Login.aspx', 'br=acc', 'br=shoesnbag', 'br=f21_acc', 'br=f21_shoesnbag')),
              follow=True),
     )
     

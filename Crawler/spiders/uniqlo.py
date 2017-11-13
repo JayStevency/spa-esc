@@ -31,10 +31,11 @@ class UniqloSpider(CrawlSpider):
         'title': '//h2[@id="goodsNmArea"]//text()',
         'productNo': '//li[@class="number"]//text()',
         'thumbnail': '//*[@id="prodImgDefault"]/a/img/@src',
-        'price': '//*[@id="salePrice"]//text()',
+        'price': '//*[@id="salePrice"]/text()',
+        'salePrice': '//*[@id="salePrice"]/span/text()',
         'originalSizeLabel': '//*[@id="listChipSize"]/li/a/em/text()',
         'color': '//*[@id="listChipColor"]/li/a/img/@alt',
-        'material': '//*[@id="prodDetail"]/div/dl[2]/dd/text()',
+        'material': '//dl[@class="spec_new"]/dt[text()[contains(., "제품소재")]]/following-sibling::dd/text()',
         'category': '//*[@id="prodInfo"]/p/a[2]/text()'
     }
     
