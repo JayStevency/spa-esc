@@ -22,6 +22,7 @@ class Forever21Loader(ItemLoader):
     price_in = MapCompose(HandleString.extract_digit_from_price)
     salePrice_in = MapCompose(HandleString.extract_digit_from_price)
     productNo_in = MapCompose(HandleString.extract_product_id_from_url)
+    material_in = MapCompose(HandleString.remove_whitespace)
    
     originalSizeLabel_out = str
     color_out = str
