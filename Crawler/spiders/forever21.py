@@ -19,7 +19,7 @@ class Forever21Spider(CrawlSpider):
         'salePrice': '//*[@id="spanProductPrice"]/span[2]/text()',
         'originalSizeLabel': '//*[@id="ulProductSize"]/li/label/text()',
         'color': '//*[@id="spanSelectedColorName"]/text()',
-        'material': '//div[@class="itemdetailcontent"]/p[text()[contains(., "FABRIC")]]/text()',
+        'material': '//*[text()[contains(., "FABRIC")]]/text()',
         'category': '//*[@id="div_breadcrumb"]/a[3]/u/text()'
     }
     
