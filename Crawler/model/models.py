@@ -35,4 +35,4 @@ def db_connect():
     Performs database connection using database settings from settings.py.
     Returns sqlalchemy engine instance
     """
-    return create_engine(URL(**settings.DATABASE), encoding='utf8')
+    return create_engine(URL(**settings.DATABASE, query={'charset': 'utf8'}), encoding='utf8')
