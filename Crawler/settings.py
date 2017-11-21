@@ -64,7 +64,8 @@ CONCURRENT_REQUESTS = 16
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'Crawler.pipelines.FilterPipeline': 200,
+   'Crawler.pipelines.CategoryPipeline': 200,
+   'Crawler.pipelines.FilterPipeline': 100,
    'Crawler.pipelines.CrawlerPipeline': 300,
 }
 
