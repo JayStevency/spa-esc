@@ -1,5 +1,5 @@
 from scrapy.loader import ItemLoader
-from scrapy.loader.processors import TakeFirst, MapCompose
+from scrapy.loader.processors import TakeFirst, MapCompose, Join
 from Crawler.util.handle_string import HandleString
 
 
@@ -11,6 +11,7 @@ class UniqloLoader(ItemLoader):
     salePrice_in = MapCompose(HandleString.extract_digit_from_price)
     productNo_in = MapCompose(HandleString.extract_digit_from_product_no)
     
+    category_out = MapCompose(Join(''))
     originalSizeLabel_out = str
     color_out = str
 
@@ -23,6 +24,7 @@ class Forever21Loader(ItemLoader):
     salePrice_in = MapCompose(HandleString.extract_digit_from_price)
     productNo_in = MapCompose(HandleString.extract_product_id_from_url)
     material_in = MapCompose(HandleString.remove_whitespace)
-   
+
+    category_out = MapCompose(Join(''))
     originalSizeLabel_out = str
     color_out = str
