@@ -20,11 +20,10 @@ class Forever21Spider(CrawlSpider):
         'originalSizeLabel': '//*[@id="ulProductSize"]/li/label/text()',
         'color': '//*[@id="spanSelectedColorName"]/text()',
         'material': '//*[text()[contains(., "FABRIC")]]/text()',
-        'category': '//*[@id="div_breadcrumb"]/a[3]/u/text()'
+        'category': '//*[@id="div_breadcrumb"]/a/u/text()'
     }
     
     rules = (
-        Rule(LinkExtractor(allow=('productid', 'ProductID')), callback='parse_item', follow=True),
         Rule(LinkExtractor(allow=('category',),
                            deny=('Login.aspx', 'br=acc', 'br=shoesnbag', 'br=f21_acc', 'br=f21_shoesnbag')),
              follow=True),
@@ -34,7 +33,7 @@ class Forever21Spider(CrawlSpider):
         """ This function parses a sample response. Some contracts are mingled
             with this docstring.
 
-            @url http://www.uniqlo.kr/display/showDisplayCache.lecs?goodsNo=UQ31088277&displayNo=UQ1A02A01A27&stonType=P&storeNo=22&siteNo=9
+            @url http://www.forever21.co.kr/Product/Product.aspx?BR=f21&Category=f21_app_knitncardigan&ProductID=2000225035&VariantID=
             @returns items 1 16
             @returns requests 0 0
             @scrapes  url thumbnail brand title price category productNo material originalSizeLabel color
