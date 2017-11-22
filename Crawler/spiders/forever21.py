@@ -26,7 +26,8 @@ class Forever21Spider(CrawlSpider):
     rules = (
         Rule(LinkExtractor(allow=('productid', 'ProductID')), callback='parse_item', follow=True),
         Rule(LinkExtractor(allow=('category',),
-                           deny=('Login.aspx', 'br=acc', 'br=shoesnbag', 'br=f21_acc', 'br=f21_shoesnbag', 'category=f21_acc_beauty_makeup_facetool')),
+                           deny=('Login.aspx', 'br=acc', 'br=shoesnbag', 'br=f21_acc', 'br=f21_shoesnbag',
+                                 'category=f21_acc_beauty_makeup_facetool')),
              follow=True),
     )
     
