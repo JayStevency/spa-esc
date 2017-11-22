@@ -23,7 +23,8 @@ class Product(DeclarativeBase):
     material = Column('material', String(500), nullable=True)
     originalSizeLabel = Column('originalSizeLabel', String(500))
     color = Column('color', String(500), nullable=True)
-    createdAt = Column('createdAt', DateTime, default=datetime.datetime.utcnow, nullable=True)
+    created_at = Column(DateTime, default=datetime.datetime.now())
+    updated_at = Column(DateTime, default=datetime.datetime.now(), onupdate=datetime.datetime.now())
 
 
 def create_deals_table(engine):
