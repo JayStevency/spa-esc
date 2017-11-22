@@ -4,15 +4,13 @@
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
-import logging
+import datetime
+import json
 from sqlalchemy.orm import sessionmaker
 from scrapy.exceptions import DropItem
-from scrapy.utils.log import configure_logging
 from Crawler.model.models import Product, db_connect, create_deals_table
 from Crawler.util.common import check_essential_element
 from Crawler.util.category.category_processing import Categorizing
-
-logger = logging.getLogger('scrapy_logger')
 
 
 class CategoryPipeline(object):
@@ -44,13 +42,8 @@ class CrawlerPipeline(object):
     def process_item(self, item, spider):
         session = self.Session()
         if check_essential_element(item):
-            configure_logging(install_root_handler=False)
-            logging.basicConfig(
-                filename='log.txt',
-                format='%(levelname)s: %(message)s',
-                level=logging.INFO
-            )
-            logging.info(item)
+            with open("logs/drop_file_%s.json" % datetime.datetime.today().strftime("%y-%m-%d"), 'a') as f:
+                f.write(json.dumps(dict(item), ensure_ascii=False)+'\r\n')
             raise DropItem("Duplicate item found: %s" % item)
         else:
             product = Product(**item)
