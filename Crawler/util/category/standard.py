@@ -73,10 +73,12 @@ CATEGORY = [
     ('t_shirts', {
         '티셔츠', '티 ', '팔티', 't-shirt', 'tee',
         '피케', 'pk티', 'pk shirt', 'pk t-shirt', 'pk t',
-        '폴로셔츠', '럭비 셔츠', 't(반팔)', 't(긴팔)', '넥t'
+        '폴로셔츠', '럭비 셔츠', 't(반팔)', 't(긴팔)', '넥t',
+        '크롭티'
     }),
     ('sweater', {
         '스웨터', 'sweater',
+        '니트', 'knit'
     }),
     ('sweat_shirts', {
         '스웨트 셔츠', '스웨트셔츠', '스웨셔츠', '스웨 셔츠', '스웻셔츠', '스웻 셔츠', 'sweat', 'sweatshirt', 'sweat shirt',
@@ -93,11 +95,11 @@ CATEGORY = [
         '뷔스티에', 'bustier',
         '슬립', 'slip',
         '캐미솔', 'camisole',
-        '탱크탑', 'tank top', 'tanktop',
+        '탱크탑', '탑', 'tank top', 'tanktop',
     }),
     ('swimwear', {
         '스윔웨어', '래시가드', 'swim wear', 'swimwear',
-        '스윔수트', 'swimsuit'
+        '스윔수트', 'swimsuit', '비키니'
     }),
     ('pants', {
         '팬츠', '바지', 'pant', 'trouser',
@@ -138,6 +140,7 @@ CATEGORY = [
         '스카잔', 'shirket',
         '바람막이', '윈드브레이커', 'windbreaker',
         '블루종', 'blouson',
+        '푸퍼'
     }),
     ('pajama', {
         '파자마'
@@ -159,11 +162,28 @@ CATEGORY = [
         '파카', 'parka',
     }),
     ('belt', {
-        '벨트', 'belt'
+        '벨트', 'belt',
     }),
     ('underwear', {
-        '바디쉐이프', '팬티', '브라', '드로즈', '트렁크스', '복서브리프', '힙허거', '쇼츠'    }),
+        '바디쉐이프', '팬티', '브라', '드로즈', '트렁크스', '복서브리프', '힙허거', '쇼츠',
+    }),
     ('socks', {
-        'socks', '삭스', '양말'
+        '삭스', '양말', 'socks',
+    }),
+    ('muffler', {
+        '머플러', 'muffler',
+        '목도리', '스톨', '넥워머',
+    }),
+    ('scarf', {
+        '스카프', 'scarf',
+    }),
+    ('hat', {
+        '모자', '캡', '비니', '페도라', '베레모', 'hat', 'cap',
+    }),
+    ('gloves', {
+        '장갑', '글러브', 'gloves',
+    }),
+    ('shoes', {
+        '신발', '부츠', '로퍼', '힐', 'shoes', 'boots', 'loafer',
     })
 ]
