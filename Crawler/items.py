@@ -19,7 +19,9 @@ class Product(scrapy.Item):
     price = scrapy.Field()
     salePrice = scrapy.Field()
     category = scrapy.Field()
+    originalCategory = scrapy.Field()
     productNo = scrapy.Field()
     material = scrapy.Field()
     originalSizeLabel = scrapy.Field()
     color = scrapy.Field()
+    
