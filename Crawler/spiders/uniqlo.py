@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy_splash import SplashRequest
@@ -14,7 +15,7 @@ class UniqloSpider(CrawlSpider):
         '&displayMallNo=UQ1&tracking=header_logo&stonType=P']
     
     custom_settings = {
-        'SPLASH_URL': 'http://192.168.99.100:8050/',
+        'SPLASH_URL': os.environ['SPLASH_URL'],
         'DUPEFILTER_CLASS': 'scrapy_splash.SplashAwareDupeFilter',
         'HTTPCACHE_STORAGE': 'scrapy_splash.SplashAwareFSCacheStorage',
         'DOWNLOADER_MIDDLEWARES': {
