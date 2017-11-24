@@ -9,44 +9,6 @@ keywordprocessor = KeywordProcessor()
 keywordprocessor.add_keywords_from_dict(standard.CATEGORY)
 
 
-class FrequencyDict(dict):
-    def __add__(self, other):
-        result = self.copy()
-        if other is None:
-            return result
-        result.update(other)
-        for k, v in other.items():
-            if k in self:
-                result[k] += self[k]
-        return result
-    
-    def __radd__(self, other):
-        result = other.copy()
-        if self is None:
-            return other
-        result.update(self)
-        for k, v in self.items():
-            if k in other:
-                result[k] += other[k]
-        return result
-    
-    def __mul__(self, number):
-        result = self.copy()
-        if result is None:
-            return None
-        for k in result.keys():
-            result[k] *= number
-        return result
-    
-    def __rmul__(self, number):
-        result = self.copy()
-        if result is None:
-            return None
-        for k in result.keys():
-            result[k] *= number
-        return result
-
-
 class Categorizing:
     def __init__(self, item):
         self.item = item
