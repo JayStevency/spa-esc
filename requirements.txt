@@ -2,3 +2,4 @@ scrapy==1.4.0
 scrapyd==1.2.0
 scrapy-splash==0.7.2
 SQLAlchemy==1.1.9
+flashtext==2.5
