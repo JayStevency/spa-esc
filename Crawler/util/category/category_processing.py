@@ -1,7 +1,12 @@
+import re
+from flashtext import KeywordProcessor
 from Crawler.util.category import standard
 
 NAME = 0
 KEYWORD_SET = 1
+
+keywordprocessor = KeywordProcessor()
+keywordprocessor.add_keywords_from_dict(standard.CATEGORY)
 
 
 class FrequencyDict(dict):
@@ -49,22 +54,31 @@ class Categorizing:
     def get_item(self):
         return self.item
     
-    def _give_score(self, str_data):
-        result = FrequencyDict({})
-        for key in standard.CATEGORY:
-            for keyword in key[KEYWORD_SET]:
-                score = str_data.count(keyword)
-                if score is not 0:
-                    result[key[NAME]] = score
-        return result
+    def _get_category_from_title(self, title):
+        
+        if title is None or len(title) is 0:
+            return None
+        
+        str_list = re.split('\W+|_', title)
+        if len(str_list) is 1:
+            
+            category = keywordprocessor.extract_keywords(str_list[0])
+            
+            if not category:
+                return None
+            else:
+                return category[0]
+        
+        category = keywordprocessor.extract_keywords(str_list[-1])
+        if not category:
+            return self._get_category_from_title(' '.join(str_list[:-1]))
+        else:
+            return category[0]
     
     def convert_category(self):
-        category_word = "".join(self.item['category'])
+        pattern = '(fw)|(ss)|\(.*?\)|\[.*?\]'
+        dettach_patten = '([a-zA-Z]+|[가-힣]+|7부|9부)'
         title = self.item['title'].lower()
-        title_result = self._give_score(title)
-        category_result = self._give_score(category_word)
-        result = category_result + 2 * title_result
-        if any(result):
-            self.item['category'] = max(result.keys(), key=(lambda k: result[k]))
-        else:
-            self.item['category'] = None
+        title = re.sub(pattern, '', title)
+        title = ' '.join(re.findall(dettach_patten, title))
+        self.item['category'] = self._get_category_from_title(title)
