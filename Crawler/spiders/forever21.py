@@ -20,14 +20,16 @@ class Forever21Spider(CrawlSpider):
         'originalSizeLabel': '//*[@id="ulProductSize"]/li/label/text()',
         'color': '//*[@id="spanSelectedColorName"]/text()',
         'material': '//*[text()[contains(., "FABRIC")]]/text()',
-        'category': '//*[@id="div_breadcrumb"]/a/u/text()'
+        'originalCategory': '//*[@id="div_breadcrumb"]/a/u/text()'
     }
     
+    denied_category = ('br=acc', 'br=shoesnbag', 'br=f21_acc', 'br=f21_shoesnbag',
+                                 'category=f21_acc_beauty_makeup_facetool')
+    denied_etc = ('Login.aspx',)
     rules = (
         Rule(LinkExtractor(allow=('productid', 'ProductID')), callback='parse_item', follow=True),
         Rule(LinkExtractor(allow=('category',),
-                           deny=('Login.aspx', 'br=acc', 'br=shoesnbag', 'br=f21_acc', 'br=f21_shoesnbag',
-                                 'category=f21_acc_beauty_makeup_facetool')),
+                           deny=denied_category + denied_etc),
              follow=True),
     )
     
