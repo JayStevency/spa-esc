@@ -41,9 +41,11 @@ The quick way::
 
 자세한 사항은 아래 scrapyd api 문서를 참고하세요
 
-**scrapy cli** : https://doc.scrapy.org/en/latest/topics/commands.html
-**scrapyd cli** : https://scrapyd.readthedocs.io/en/latest/overview.html#scheduling-a-spider-run
-**scrapyd api** : https://scrapyd.readthedocs.io/en/latest/api.html
+Document scrapy cli at: https://doc.scrapy.org/en/latest/topics/commands.html
+
+Document scrapyd cli at: https://scrapyd.readthedocs.io/en/latest/overview.html#scheduling-a-spider-run
+
+Document scrapyd api at: https://scrapyd.readthedocs.io/en/latest/api.html
 
 ##Releases
 
