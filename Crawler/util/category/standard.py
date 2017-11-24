@@ -101,10 +101,11 @@ CATEGORY = {
         '스윔수트', 'swimsuit', '비키니'
     ],
     'pants': [
-        '팬츠', '바지', 'pant', 'trouser',
+        '팬츠', '바지', '트라우저', 'pant', 'trouser',
         '진 ', '청바지', '데님팬츠', 'jean',
         '쇼트팬츠', '쇼츠', '쇼트 팬츠', 'short',
-        '슬랙스', 'slacks', '치노', '진'
+        '슬랙스', 'slacks', '치노', '진',
+        '큐롯'
     ],
     'skirt': [
         '스커트', '치마', 'skirt', 'apron', 'skt'
@@ -187,6 +188,7 @@ CATEGORY = {
     ],
     'accessory': [
         '목걸이', '초커', '팬던트', 'necklace', 'pendant',
-        '반지', 'ring'
+        '반지', 'ring',
+        '귀걸이'
     ]
 }
