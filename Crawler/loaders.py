@@ -33,10 +33,12 @@ class Forever21Loader(ItemLoader):
 
 class BalaanLoader(ItemLoader):
     default_output_processor = TakeFirst()
-    
+
+    price_in = MapCompose(HandleString.extract_digit_from_price)
     title_in = MapCompose(replace_entities, replace_escape_chars)
     brand_in = MapCompose(replace_entities, replace_escape_chars)
-    
-    category_out = Identity()
-    thumbnail_out = Identity()
-    originalSizeLabel_out = Identity()
+
+    originalCategory_out = str
+    category_out = str
+    thumbnail_out = str
+    originalSizeLabel_out = str
