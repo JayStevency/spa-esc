@@ -58,7 +58,7 @@ Note v(0.0.1) : Prototype scrapy system
 2. 코드 수정은 본인 dev branch 에 commit
 3. origin branch 에 커밋 사항 반영 
 4. develop branch 에 pull request
-5. develop 단계 테스트 거친 후 realise 로 통합
+5. develop 단계 테스트 거친 후 release 로 통합
 6. version 업 한 후 master 로 통합
 
 ##Code of Conduct
