@@ -39,6 +39,7 @@ class BalaanLoader(ItemLoader):
     title_in = MapCompose(replace_entities, replace_escape_chars)
     brand_in = MapCompose(replace_entities, replace_escape_chars)
     originalCategory_in = TakeUnique()
+    originalSizeLabel_in = TakeUnique()
 
     originalCategory_out = str
     category_out = str
