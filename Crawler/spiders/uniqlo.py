@@ -3,7 +3,7 @@ import os
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy_splash import SplashRequest
-from Crawler.loders.item_loader import UniqloLoader
+from Crawler.loaders import UniqloLoader
 from Crawler.items import Product
 
 
@@ -60,6 +60,7 @@ class UniqloSpider(CrawlSpider):
         loader = UniqloLoader(item=Product(), response=response)
         for field, xpath in self.item_fields.items():
             loader.add_xpath(field, xpath)
+        loader.add_value('shopHost', self.name.lower())
         loader.add_value('url', response.url)
         loader.add_value('brand', self.name.lower())
         return loader.load_item()

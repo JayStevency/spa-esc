@@ -2,7 +2,7 @@
 import scrapy
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
-from Crawler.loders.item_loader import Forever21Loader
+from Crawler.loaders import Forever21Loader
 from Crawler.items import Product
 
 
@@ -45,6 +45,7 @@ class Forever21Spider(CrawlSpider):
         loader = Forever21Loader(item=Product(), response=response)
         for field, xpath in self.item_fields.items():
             loader.add_xpath(field, xpath)
+        loader.add_value('shopHost', self.name.lower())
         loader.add_value('url', response.url)
         loader.add_value('brand', self.name.lower())
         return loader.load_item()
