@@ -15,6 +15,7 @@ class Product(DeclarativeBase):
     url = Column('url', String(500), nullable=True)
     thumbnail = Column('thumbnail', String(500), nullable=True)
     brand = Column('brand', String(255), nullable=True)
+    shopHost = Column('shopHost', String(255), nullable=True)
     title = Column('title', String(255), nullable=True)
     price = Column('price', Integer, nullable=True, default=0)
     salePrice = Column('salePrice', Integer, nullable=True, default=0)
