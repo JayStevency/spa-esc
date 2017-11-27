@@ -2,7 +2,7 @@ from scrapy.loader import ItemLoader
 from scrapy.loader.processors import TakeFirst, MapCompose, Identity
 from Crawler.util.handle_string import HandleString
 from w3lib.html import replace_entities, replace_escape_chars
-from Crawler.util.common import replace_useless_chars
+from Crawler.util.common import replace_useless_chars, TakeUnique
 
 
 class UniqloLoader(ItemLoader):
@@ -38,7 +38,7 @@ class BalaanLoader(ItemLoader):
     price_in = MapCompose(HandleString.extract_digit_from_price)
     title_in = MapCompose(replace_entities, replace_escape_chars)
     brand_in = MapCompose(replace_entities, replace_escape_chars)
-    originalCategory_in = MapCompose(Identity, replace_useless_chars)
+    originalCategory_in = TakeUnique()
 
     originalCategory_out = str
     category_out = str
