@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
-from crawler.loaders import BalaanLoader
-from crawler.items import Product
+from Crawler.loaders import BalaanLoader
+from Crawler.items import Product
 
 
 class BalaanSpider(CrawlSpider):
@@ -16,9 +16,13 @@ class BalaanSpider(CrawlSpider):
     ]
     start_urls = ('http://www.balaan.co.kr/shop/goods/goods_list.php?category={}'.format(no) for no in allow_categories)
     
+    custom_settings = {
+        'ROBOTSTXT_OBEY': False
+    }
+    
     rules = (
         Rule(LinkExtractor(allow=('page=',), deny=('002002001', '002002$', '001002005', '001002$'))),
-        Rule(LinkExtractor(allow=('goodsno=\d+', )), callback='parse_item'),
+        Rule(LinkExtractor(allow=('goodsno=\d+',)), callback='parse_item'),
     )
     
     def parse_item(self, response):
@@ -29,7 +33,7 @@ class BalaanSpider(CrawlSpider):
         loader.add_xpath('productNo', '//dd[@class="detail-spec__item-value"]//strong/text()')
         loader.add_xpath('price', '//span[@id="price"]/text()')
         loader.add_xpath('brand', '//header[@class="detail-info__spec-header"]//a[contains(@href, "brand")]/text()')
-        loader.add_xpath('category', '//div[@class="detail-info__spec--category"]//a/text()')
+        loader.add_xpath('originalCategory', '//div[@class="detail-info__spec--category"]//a/text()')
         loader.add_xpath('thumbnail', '//ul[@class="detail-info__thembnail-list"]//img/@src')
         loader.add_xpath('originalSizeLabel', '//li[@class="detail-spec__option-item"]//option/@value')
         
