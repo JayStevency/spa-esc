@@ -1,6 +1,12 @@
 import re
 
 
+class ExtractPrice(object):
+    def __call__(self, values):
+        for value in values:
+            return ''.join(re.findall('\d', value))
+
+
 class HandleString:
     @classmethod
     def remove_whitespace(cls, data):
