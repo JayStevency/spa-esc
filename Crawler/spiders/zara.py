@@ -23,12 +23,7 @@ class ZaraSpider(CrawlSpider):
         'material': '//empty',
     }
     
-    custom_settings = {
-        'AJAXCRAWL_ENABLED': True
-    }
-    
     rules = (
-        # Rule(LinkExtractor(allow=(r'.')), callback='parse_list'),
         Rule(LinkExtractor(allow=('man', 'woman', 'trf'), deny=(r'\?v1=11112', r'\?v1=18002', 'en')), follow=True),
         Rule(LinkExtractor(allow='\.html\?v1=\d+$', deny=(r'\?v1=11112', r'\?v1=18002', 'en')),
              follow=True),
