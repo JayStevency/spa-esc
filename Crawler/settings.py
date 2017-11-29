@@ -26,10 +26,19 @@ CONCURRENT_REQUESTS = 16
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-# DOWNLOAD_DELAY = 3
-# The download delay setting will honor only one of:
-# CONCURRENT_REQUESTS_PER_DOMAIN = 16
-# CONCURRENT_REQUESTS_PER_IP = 16
+# Configure concurrent requests performed by Scrapy
+DOWNLOAD_DELAY = 0.05
+CONCURRENT_REQUESTS = 24
+CONCURRENT_REQUESTS_PER_DOMAIN = 12
+CONCURRENT_REQUESTS_PER_IP = 12
+
+# Configure the AutoThrottle extension
+AUTOTHROTTLE_ENABLED = True
+AUTOTHROTTLE_DEBUG = True
+AUTOTHROTTLE_START_DELAY = 1
+AUTOTHROTTLE_MAX_DELAY = 60
+AUTOTHROTTLE_TARGET_CONCURRENCY = 3
+
 
 # Disable cookies (enabled by default)
 # COOKIES_ENABLED = False
@@ -91,5 +100,6 @@ ITEM_PIPELINES = {
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 FEED_EXPORT_ENCODING = 'utf-8'
+FEED_EXPORT_FIELDS = ['url', 'thumbnail', 'brand', 'title', 'price', 'originalSizeLabel', 'category']
 
 
