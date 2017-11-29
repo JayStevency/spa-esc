@@ -7,6 +7,12 @@ class ExtractPrice(object):
             return ''.join(re.findall('\d', value))
 
 
+class AddHttpString(object):
+    def __call__(self, values):
+        for value in values:
+            return 'http:' + value
+
+
 class HandleString:
     @classmethod
     def remove_whitespace(cls, data):
