@@ -1,6 +1,6 @@
 from scrapy.loader import ItemLoader
 from scrapy.loader.processors import TakeFirst, MapCompose, Compose
-from Crawler.util.handle_string import HandleString, ExtractPrice
+from Crawler.util.handle_string import HandleString, ExtractPrice, AddHttpString
 from w3lib.html import replace_entities, replace_escape_chars
 from Crawler.util.common import replace_useless_chars, TakeUnique
 
@@ -51,5 +51,6 @@ class ZaraLoader(ItemLoader):
     default_output_processor = TakeFirst()
     
     price_in = ExtractPrice()
+    thumbnail_in = AddHttpString()
     
     originalSizeLabel_out = str
