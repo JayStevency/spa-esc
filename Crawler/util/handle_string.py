@@ -13,6 +13,12 @@ class AddHttpString(object):
             return 'http:' + value
 
 
+class StringToList(object):
+    def __call__(self, values):
+        for value in values:
+            return value.replace(' ', '').split(',')
+
+
 class HandleString:
     @classmethod
     def remove_whitespace(cls, data):
