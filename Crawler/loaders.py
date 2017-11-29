@@ -1,6 +1,6 @@
 from scrapy.loader import ItemLoader
-from scrapy.loader.processors import TakeFirst, MapCompose, Compose
-from Crawler.util.handle_string import HandleString, ExtractPrice, AddHttpString
+from scrapy.loader.processors import TakeFirst, MapCompose
+from Crawler.util.handle_string import HandleString, ExtractPrice, AddHttpString, StringToList
 from w3lib.html import replace_entities, replace_escape_chars
 from Crawler.util.common import replace_useless_chars, TakeUnique
 
@@ -54,3 +54,16 @@ class ZaraLoader(ItemLoader):
     thumbnail_in = AddHttpString()
     
     originalSizeLabel_out = str
+
+
+class SpaoLoader(ItemLoader):
+    default_output_processor = TakeFirst()
+    
+    originalSizeLabel_in = StringToList()
+    color_in = StringToList()
+    price_in = ExtractPrice()
+    salePrice_in = ExtractPrice()
+    
+    originalCategory_out = str
+    originalSizeLabel_out = str
+    color_out = str
