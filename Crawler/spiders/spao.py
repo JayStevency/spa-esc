@@ -1,32 +1,27 @@
 # -*- coding: utf-8 -*-
 import scrapy
+import os
 import re
-from scrapy.linkextractors import LinkExtractor
-from scrapy.spiders import CrawlSpider, Rule
+from scrapy_splash import SplashRequest
 from Crawler.items import Product
 from Crawler.loaders import SpaoLoader
 
 
-def process_ctg_value(value):
-    m = re.search('disp_ctg_no\:\'\d+\'', value)
-    if m:
-        ctg_reg_obj = re.search('\d+', m.group())
-        ctg_no = ctg_reg_obj.group()
-        return 'http://spao.elandmall.com/dispctg/initDispCtg.action?disp_ctg_no=%s' % ctg_no
-
-
-def process_detail_value(value):
-    m = re.search('goods_no\:\'\d+\'', value)
-    if m:
-        good_reg_obj = re.search('\d+', m.group())
-        good_no = good_reg_obj.group()
-        return 'http://spao.elandmall.com/goods/initGoodsDetail.action?goods_no=%s' % good_no
-
-
-class SpaoSpider(CrawlSpider):
+class SpaoSpider(scrapy.Spider):
     name = 'spao'
     allowed_domains = ['spao.elandmall.com']
-    start_urls = ['http://spao.elandmall.com/main/initMain.action']
+    start_urls = ['http://spao.elandmall.com/search/search.action?kwd=*#hashPage%s'
+                  '/mall_no=0000037&sort=7&preKwd=&category_1depth=&color_info='
+                  '&category_2depth=&deliCostFreeYn=&vend_nm='
+                  '&deliCostPoliNo=&applyEndDate=&vend_no='
+                  '&dispStartDate=&newGoodsStartDate='
+                  '&min_price=&category_4depth=&brand_nm='
+                  '&srchFd=null&setDicountYn=&category_3depth=&applyStartDate='
+                  '&_=1512003966634&min_rate=&brand_no=&category_5depth=null'
+                  '&category_6depth=null&kwd=&listType=image&pageSize=60&giftYn='
+                  '&newGoodsEndDate=&max_rate=&reSrch=&size_info='
+                  '&oneMoreYn=&welfareYn=&staffDCYn=&dispEndDate='
+                  '&discountYn=&max_price=&material_info=&preFlag=' % i for i in range(50)]
     
     item_fields = {
         'title': '//strong[@class="goods_name"]/text()',
@@ -40,11 +35,30 @@ class SpaoSpider(CrawlSpider):
         'originalCategory': '//*[@selected="selected"]/text()'
     }
     
-    rules = (
-        Rule(LinkExtractor(allow='dispctg', attrs=('onclick',), process_value=process_ctg_value), follow=True),
-        Rule(LinkExtractor(allow=r'goods_no\=\d+', attrs=('onclick',), process_value=process_detail_value),
-             callback='parse_item'),
-    )
+    custom_settings = {
+        'SPLASH_URL': os.environ['SPLASH_URL'],
+        'DUPEFILTER_CLASS': 'scrapy_splash.SplashAwareDupeFilter',
+        'HTTPCACHE_STORAGE': 'scrapy_splash.SplashAwareFSCacheStorage',
+        'DOWNLOADER_MIDDLEWARES': {
+            'scrapy_splash.SplashCookiesMiddleware': 723,
+            'scrapy_splash.SplashMiddleware': 725,
+            'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+        },
+        'SPIDER_MIDDLEWARES': {
+            'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
+        }
+    }
+    
+    def start_requests(self):
+        for url in self.start_urls:
+            yield SplashRequest(url, callback=self.parse_list, args={'wait': 5})
+    
+    def parse_list(self, response):
+        goods_no_list = response.xpath('//a/@onclick').re(r'goods_no\:\'\d+')
+        for good_reg_obj in goods_no_list:
+            good_no = ''.join(re.findall('\d', good_reg_obj))
+            yield scrapy.Request('http://spao.elandmall.com/goods/initGoodsDetail.action?goods_no=%s' % good_no,
+                                 callback=self.parse_item)
     
     def parse_item(self, response):
         """ This function parses a sample response. Some contracts are mingled
