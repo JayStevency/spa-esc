@@ -131,7 +131,7 @@ CATEGORY = {
         '로브', 'robe',
     ],
     'vest': [
-        '베스트', '조끼', 'vest',
+        '베스트', '조끼', 'vest', '패쪼'
     ],
     'cardigan': [
         '가디건', '카디건', 'cardigan',
