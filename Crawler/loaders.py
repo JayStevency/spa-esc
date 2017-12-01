@@ -67,3 +67,14 @@ class SpaoLoader(ItemLoader):
     originalCategory_out = str
     originalSizeLabel_out = str
     color_out = str
+
+
+class MusinsaLoader(ItemLoader):
+    default_output_processor = TakeFirst()
+    
+    thumbnail_in = AddHttpString()
+    price_in = ExtractPrice()
+    salePrice_in = ExtractPrice()
+    originalSizeLabel_in = TakeUnique()
+    
+    originalSizeLabel_out = str
