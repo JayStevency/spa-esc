@@ -3,8 +3,8 @@ import re
 
 class ExtractPrice(object):
     def __call__(self, values):
-        for value in values:
-            return ''.join(re.findall('\d', value))
+        value = ''.join(values)
+        return ''.join(re.findall('\d', value))
 
 
 class AddHttpString(object):
