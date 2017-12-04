@@ -78,3 +78,13 @@ class MusinsaLoader(ItemLoader):
     originalSizeLabel_in = TakeUnique()
     
     originalSizeLabel_out = str
+
+
+class HnmLoader(ItemLoader):
+    default_output_processor = TakeFirst()
+
+    thumbnail_in = AddHttpString()
+    price_in = ExtractPrice()
+    salePrice_in = ExtractPrice()
+
+    originalSizeLabel_out = str
