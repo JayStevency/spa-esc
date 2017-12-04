@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import re
+import requests
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 from Crawler.items import Product
@@ -40,15 +41,20 @@ class MusinsaSpider(CrawlSpider):
         for field, xpath in self.item_fields.items():
             loader.add_xpath(field, xpath)
         
-        size_labels = response.xpath('//tr[@class="order_size_save"]/following-sibling::tr/th/text()').extract()
-        if not size_labels:
-            size_labels = response.xpath('//select[@id="option1"]/option/@value').extract()
-        
-        loader.add_value('originalSizeLabel', size_labels)
         product_no_obj = re.findall('\d+', response.url)
         if product_no_obj:
             loader.add_value('productNo', product_no_obj[0])
         loader.add_value('shopHost', self.name.lower())
         loader.add_value('url', response.url)
+        
+        if response.xpath('//select[@id="option2"]'):
+            url = "http://store.musinsa.com/app/svc/production_option"
+            data = {'goods_no': product_no_obj[0], 'goods_sub': product_no_obj[1]}
+            res = requests.post(url=url, data=data)
+            size_labels = [obj['val'] for obj in res.json()]
+        else:
+            size_labels = response.xpath('//select[@id="option1"]/option/@value').extract()
+        
+        loader.add_value('originalSizeLabel', size_labels)
         
         return loader.load_item()
