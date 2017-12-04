@@ -71,7 +71,7 @@ BIG_CATEGORY = {
 
 CATEGORY = {
     't_shirts': [
-        '티셔츠', '티 ', '팔티', 't-shirt', 'tee',
+        '티셔츠', '티', '티 ', '팔티', 't-shirt', 'tee',
         '피케', 'pk티', 'pk shirt', 'pk t-shirt', 'pk t',
         '폴로셔츠', '럭비 셔츠', '크롭티', 't'
     ],
