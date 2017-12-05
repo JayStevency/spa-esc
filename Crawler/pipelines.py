@@ -6,11 +6,13 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 import datetime
 import json
-from sqlalchemy.orm import sessionmaker
+
 from scrapy.exceptions import DropItem
-from Crawler.model.models import Product, db_connect, create_deals_table
-from Crawler.util.common import check_essential_element
+from sqlalchemy.orm import sessionmaker
+
+from Crawler.models import Product, db_connect, create_deals_table
 from Crawler.util.category.category_processing import Categorizing
+from Crawler.util.common import check_essential_element
 
 
 class CategoryPipeline(object):
