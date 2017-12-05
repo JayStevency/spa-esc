@@ -10,9 +10,9 @@ import json
 from scrapy.exceptions import DropItem
 from sqlalchemy.orm import sessionmaker
 
-from Crawler.models import Product, db_connect, create_deals_table
 from Crawler.util.category.category_processing import Categorizing
 from Crawler.util.common import check_essential_element
+from models import Product, db_connect, create_deals_table
 
 
 class CategoryPipeline(object):
