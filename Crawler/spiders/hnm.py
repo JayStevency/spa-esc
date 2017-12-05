@@ -12,13 +12,13 @@ class HnmSpider(CrawlSpider):
     allowed_domains = ['www2.hm.com']
     start_urls = [
         'http://www2.hm.com/ko_kr/ladies/shop-by-product/view-all.html?'
-        'product-type=ladies_all&sort=stock&offset=0&page-size=7000',
+        'product-type=ladies_all&sort=stock&offset={}&page-size=100',
         'http://www2.hm.com/ko_kr/men/shop-by-product/view-all.html?'
-        'product-type=men_all&sort=stock&offset=0&page-size=3000',
+        'product-type=men_all&sort=stock&offset={}&page-size=100',
         'http://www2.hm.com/ko_kr/sale/shopbyproductladies/view-all.html?'
-        'product-type=ladies_all&sort=stock&offset=0&page-size=2000',
+        'product-type=ladies_all&sort=stock&offset={}&page-size=100',
         'http://www2.hm.com/ko_kr/sale/shopbyproductmen/viewall.html?'
-        'product-type=men_all&sort=stock&offset=0&page-size=1000'
+        'product-type=men_all&sort=stock&offset={}&page-size=100'
     ]
     
     custom_settings = {
@@ -28,6 +28,10 @@ class HnmSpider(CrawlSpider):
     rules = (
         Rule(LinkExtractor(allow=r'ko_kr\/productpage\.\d+\.html'), callback='parse_item'),
     )
+    
+    def start_requests(self):
+        for i in range(4):
+            return [scrapy.Request(self.start_urls[i].format(j * 100)) for j in range(100)]
     
     def parse_item(self, response):
         loader = HnmLoader(item=Product(), response=response)
