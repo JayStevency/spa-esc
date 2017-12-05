@@ -49,6 +49,8 @@ Document scrapyd api at: https://scrapyd.readthedocs.io/en/latest/api.html
 
 ##Releases
 
+Note v(0.0.2) : Connected to ES System
+
 Note v(0.0.1) : Prototype scrapy system
 
 ##Contributing
