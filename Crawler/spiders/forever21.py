@@ -24,7 +24,7 @@ class Forever21Spider(CrawlSpider):
     }
     
     denied_category = ('br=acc', 'br=shoesnbag', 'br=f21_acc', 'br=f21_shoesnbag',
-                                 'category=f21_acc_beauty_makeup_facetool')
+                       'category=f21_acc_beauty_makeup_facetool')
     denied_etc = ('Login.aspx',)
     rules = (
         Rule(LinkExtractor(allow=('productid', 'ProductID')), callback='parse_item', follow=True),
