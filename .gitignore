@@ -56,7 +56,6 @@ fabric.properties
 *.DS_Store
 *.log
 *.out
-config.py
 dbs/
 *.pid
 logs/
