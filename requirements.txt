@@ -4,4 +4,4 @@ scrapy-splash==0.7.2
 SQLAlchemy==1.1.9
 flashtext==2.5
 elasticsearch==5.4.0
-elasticsearch-dsl=5.3.0
+elasticsearch-dsl==5.3.0
