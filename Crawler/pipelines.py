@@ -6,10 +6,10 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 import datetime
 import json
-
+import os
 from scrapy.exceptions import DropItem
 from sqlalchemy.orm import sessionmaker
-
+from elasticsearch import Elasticsearch, helpers
 from Crawler.util.category.category_processing import Categorizing
 from Crawler.util.common import check_essential_element
 from models import Product, db_connect, create_deals_table
@@ -45,7 +45,7 @@ class CrawlerPipeline(object):
         session = self.Session()
         if check_essential_element(item):
             with open("logs/drop_file_%s.json" % datetime.datetime.today().strftime("%y-%m-%d"), 'a') as f:
-                f.write(json.dumps(dict(item), ensure_ascii=False)+'\r\n')
+                f.write(json.dumps(dict(item), ensure_ascii=False) + '\r\n')
             raise DropItem("Duplicate item found: %s" % item)
         else:
             product = Product(**item)
@@ -68,3 +68,24 @@ class CrawlerPipeline(object):
     
     def close_spider(self, spider):
         pass
+
+
+class ESPipeline(object):
+    def __init__(self):
+        self.es_client = Elasticsearch(os.environ['ES_URL'])
+    
+    def process_item(self, item, spider):
+        action = {
+            "_index": "fair_clothes",
+            "_type": "cloth",
+            "_id": item['brand'] + item['productNo'],
+            "_source": {
+                'title': item['title'],
+                'category': item['category'],
+                'brand': item['brand'],
+                'productNo': item['productNo'],
+                'originalCategory': item['originalCategory']
+            }}
+        
+        helpers.bulk(self.es_client, [action])
+        return item
