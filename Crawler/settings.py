@@ -73,9 +73,11 @@ AUTOTHROTTLE_TARGET_CONCURRENCY = 3
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'Crawler.pipelines.CategoryPipeline': 200,
    'Crawler.pipelines.FilterPipeline': 100,
+   'Crawler.pipelines.CategoryPipeline': 200,
    'Crawler.pipelines.CrawlerPipeline': 300,
+   'Crawler.pipelines.ESPipeline': 400,
+   
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
