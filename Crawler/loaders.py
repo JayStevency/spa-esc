@@ -17,6 +17,9 @@ class UniqloLoader(ItemLoader):
     originalSizeLabel_out = str
     color_out = str
 
+    detailImages_out = str
+    description_out = str
+
 
 class Forever21Loader(ItemLoader):
     default_output_processor = TakeFirst()
@@ -30,6 +33,9 @@ class Forever21Loader(ItemLoader):
     originalCategory_out = str
     originalSizeLabel_out = str
     color_out = str
+
+    detailImages_out = str
+    description_out = str
 
 
 class BalaanLoader(ItemLoader):
@@ -52,8 +58,12 @@ class ZaraLoader(ItemLoader):
     
     price_in = ExtractPrice()
     thumbnail_in = AddHttpString()
+    detailImages_in = AddHttpString()
     
     originalSizeLabel_out = str
+
+    detailImages_out = str
+    description_out = str
 
 
 class SpaoLoader(ItemLoader):
@@ -67,6 +77,9 @@ class SpaoLoader(ItemLoader):
     originalCategory_out = str
     originalSizeLabel_out = str
     color_out = str
+
+    detailImages_out = str
+    description_out = str
 
 
 class MusinsaLoader(ItemLoader):
@@ -87,4 +100,9 @@ class HnmLoader(ItemLoader):
     price_in = ExtractPrice()
     salePrice_in = ExtractPrice()
 
+    detailImages_in = AddHttpString()
+
     originalSizeLabel_out = str
+
+    detailImages_out = str
+    description_out = str
