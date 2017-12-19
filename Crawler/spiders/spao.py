@@ -32,7 +32,8 @@ class SpaoSpider(scrapy.Spider):
         'originalSizeLabel': '//th[text()[contains(.,"치수")]]/following-sibling::td/text()',
         'color': '//th[text()[contains(.,"색상")]]/following-sibling::td/text()',
         'material': '//th[text()[contains(.,"제품 소재")]]/following-sibling::td/text()',
-        'originalCategory': '//*[@selected="selected"]/text()'
+        'originalCategory': '//*[@selected="selected"]/text()',
+        'detailImages': '//*[@class="detail_html"]//img/@src',
     }
     
     custom_settings = {

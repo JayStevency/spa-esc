@@ -42,8 +42,10 @@ class HnmSpider(CrawlSpider):
         loader.add_value('thumbnail', data['image'])
         loader.add_value('originalCategory', data['category']['name'])
         loader.add_value('productNo', data['sku'])
+        loader.add_value('description', data['description'])
         loader.add_xpath('originalSizeLabel',
                          '//ul[@data-sizelist=%s]/li[@class="list-item"]//span/text()' % data['sku'])
+        loader.add_xpath('detailImages', '//*[@class="product-detail-thumbnails"]//img/@src')
         
         origin_price = response.xpath('//small[@class="price-value-original"]/text()').extract()
         if origin_price:
@@ -51,7 +53,7 @@ class HnmSpider(CrawlSpider):
             loader.add_xpath('salePrice', '//span[@class="price-value"]/text()')
         else:
             loader.add_xpath('price', '//span[@class="price-value"]/text()')
-        
+            
         loader.add_value('shopHost', self.name.lower())
         loader.add_value('url', response.url)
         loader.add_value('brand', self.name.lower())

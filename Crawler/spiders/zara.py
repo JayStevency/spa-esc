@@ -21,6 +21,8 @@ class ZaraSpider(CrawlSpider):
         'originalSizeLabel': '//span[@class="size-name"]/text()',
         'color': '//span[@class="_colorName"]/text()',
         'material': '//empty',
+        'detailImages': '//*[@id="detail-images"]/*//a/@href',
+        'description': '//*[@id="description"]/*/text()'
     }
     
     rules = (

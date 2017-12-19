@@ -37,7 +37,9 @@ class UniqloSpider(CrawlSpider):
         'originalSizeLabel': '//*[@id="listChipSize"]/li/a/em/text()',
         'color': '//*[@id="listChipColor"]/li/a/img/@alt',
         'material': '//dl[@class="spec_new"]/dt[text()[contains(., "제품소재")]]/following-sibling::dd/text()',
-        'originalCategory': '//*[@id="prodInfo"]/p/a/text()'
+        'originalCategory': '//*[@id="prodInfo"]/p/a/text()',
+        'detailImages': '//ul[@id="prodThumbImgs"]/li/a/@href',
+        'description': '//*[@class="spec"]/text()'
     }
     
     rules = (

@@ -20,7 +20,9 @@ class Forever21Spider(CrawlSpider):
         'originalSizeLabel': '//*[@id="ulProductSize"]/li/label/text()',
         'color': '//*[@id="spanSelectedColorName"]/text()',
         'material': '//*[text()[contains(., "FABRIC")]]/text()',
-        'originalCategory': '//*[@id="div_breadcrumb"]/a/u/text()'
+        'originalCategory': '//*[@id="div_breadcrumb"]/a/u/text()',
+        'detailImages': '//ul[@id="pdp_thumbnail"]/li/a/img/@src',
+        'description': '//*[@class="itemdetailcontent"]/*/text()'
     }
     
     denied_category = ('br=acc', 'br=shoesnbag', 'br=f21_acc', 'br=f21_shoesnbag',
