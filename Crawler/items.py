@@ -15,3 +15,5 @@ class Product(scrapy.Item):
     material = scrapy.Field()
     originalSizeLabel = scrapy.Field()
     color = scrapy.Field()
+    detailImages = scrapy.Field()
+    description = scrapy.Field()
