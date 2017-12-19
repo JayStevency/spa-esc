@@ -1,6 +1,6 @@
 import datetime
 import config
-from sqlalchemy import create_engine, Column, Integer, String, DateTime
+from sqlalchemy import create_engine, Column, Integer, String, DateTime, TEXT
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.engine.url import URL
 
@@ -25,6 +25,8 @@ class Product(DeclarativeBase):
     originalCategory = Column('originalCategory', String(500), nullable=True)
     originalSizeLabel = Column('originalSizeLabel', String(500), nullable=True)
     color = Column('color', String(500), nullable=True)
+    detailImages = Column('detailImages', String(1000), nullable=True)
+    description = Column('description', TEXT, nullable=True)
     created_at = Column(DateTime, default=datetime.datetime.now())
     updated_at = Column(DateTime, default=datetime.datetime.now(), onupdate=datetime.datetime.now())
 
