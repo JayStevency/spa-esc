@@ -1,7 +1,7 @@
 import os
 
 DATABASE = {
-    'drivername': 'mysql',
+    'drivername': os.environ['DB_DIALECT'],
     'host': os.environ['DB_HOST'],
     'port': os.environ['DB_PORT'],
     'username': os.environ['DB_USERNAME'],
