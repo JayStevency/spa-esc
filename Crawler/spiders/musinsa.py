@@ -2,16 +2,15 @@
 import scrapy
 import re
 import requests
-from scrapy.linkextractors import LinkExtractor
-from scrapy.spiders import CrawlSpider, Rule
 from Crawler.items import Product
 from Crawler.loaders import MusinsaLoader
 
 
-class MusinsaSpider(CrawlSpider):
+class MusinsaSpider(scrapy.Spider):
     name = 'musinsa'
     allowed_domains = ['store.musinsa.com']
-    start_urls = ['http://store.musinsa.com/app/']
+    category_nums = [('001', 600), ('002', 150), ('003', 150), ('020', 20), ('007', 150), ('008', 40), ('011', 200)]
+    start_urls = ['http://store.musinsa.com/app/items/lists/{}'.format(i[0]) for i in category_nums]
     
     item_fields = {
         'title': '//span[@class="product_title"]/span[not(@class)]/text()',
@@ -20,13 +19,26 @@ class MusinsaSpider(CrawlSpider):
         'salePrice': '//span[@id="sale_price"]/text()',
         'material': '//li[text()[contains(.,"소재")]]/following-sibling::li/text()',
         'originalCategory': '//*[@class="item_categories"]/a/text()',
-        'brand': '//*[@class="brand"]/a/span/text()'
+        'brand': '//*[@class="brand"]/a/span/text()',
+        'detailImages': '//div[@class="detail_product_info"]//img/@src',
+        'description': '//div[@class="detail_product_info"]//text()',
+        'detailHtml': '//div[@class="detail_product_info"]',
     }
     
-    rules = (
-        Rule(LinkExtractor(allow=r'lists/'), follow=True),
-        Rule(LinkExtractor(allow=r'detail/'), callback='parse_item', follow=True),
-    )
+    def start_requests(self):
+        for url in self.start_urls:
+            yield scrapy.Request(url, callback=self.parse_paging)
+    
+    def parse_paging(self, response):
+        category_num = re.findall('\d+$', response.url)[0]
+        limit = [i[1] for i in self.category_nums if i[0] == category_num][0]
+        for i in range(limit):
+            yield scrapy.Request(response.url + '?page={}'.format(i), callback=self.parse_list)
+    
+    def parse_list(self, response):
+        product_links = response.xpath('//a[@href[contains(., "detail")]]/@href').extract()
+        for url in product_links:
+            yield scrapy.Request('http://' + self.allowed_domains[0] + url, callback=self.parse_item)
     
     def parse_item(self, response):
         """ This function parses a sample response. Some contracts are mingled
@@ -58,3 +70,6 @@ class MusinsaSpider(CrawlSpider):
         loader.add_value('originalSizeLabel', size_labels)
         
         return loader.load_item()
+    
+    def closed(self, reason):
+        self.logger.info(reason)
