@@ -16,7 +16,7 @@ class UniqloLoader(ItemLoader):
     originalCategory_out = str
     originalSizeLabel_out = str
     color_out = str
-
+    
     detailImages_out = str
     description_out = str
 
@@ -33,7 +33,7 @@ class Forever21Loader(ItemLoader):
     originalCategory_out = str
     originalSizeLabel_out = str
     color_out = str
-
+    
     detailImages_out = str
     description_out = str
 
@@ -61,7 +61,7 @@ class ZaraLoader(ItemLoader):
     detailImages_in = AddHttpString()
     
     originalSizeLabel_out = str
-
+    
     detailImages_out = str
     description_out = str
 
@@ -77,7 +77,7 @@ class SpaoLoader(ItemLoader):
     originalCategory_out = str
     originalSizeLabel_out = str
     color_out = str
-
+    
     detailImages_out = str
     description_out = str
 
@@ -90,19 +90,25 @@ class MusinsaLoader(ItemLoader):
     salePrice_in = ExtractPrice()
     originalSizeLabel_in = TakeUnique()
     
+    detailImages_in = AddHttpString()
+    
     originalSizeLabel_out = str
+    
+    detailImages_out = str
+    description_out = str
+    detailHtml_out = str
 
 
 class HnmLoader(ItemLoader):
     default_output_processor = TakeFirst()
-
+    
     thumbnail_in = AddHttpString()
     price_in = ExtractPrice()
     salePrice_in = ExtractPrice()
-
+    
     detailImages_in = AddHttpString()
-
+    
     originalSizeLabel_out = str
-
+    
     detailImages_out = str
     description_out = str
