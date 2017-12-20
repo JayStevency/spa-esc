@@ -27,6 +27,7 @@ class Product(DeclarativeBase):
     color = Column('color', String(500), nullable=True)
     detailImages = Column('detailImages', String(1000), nullable=True)
     description = Column('description', TEXT, nullable=True)
+    detailHtml = Column('detailHtml', TEXT, nullable=True)
     created_at = Column(DateTime, default=datetime.datetime.now())
     updated_at = Column(DateTime, default=datetime.datetime.now(), onupdate=datetime.datetime.now())
 
