@@ -17,3 +17,4 @@ class Product(scrapy.Item):
     color = scrapy.Field()
     detailImages = scrapy.Field()
     description = scrapy.Field()
+    detailHtml = scrapy.Field()
