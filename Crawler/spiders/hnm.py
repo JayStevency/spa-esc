@@ -53,8 +53,11 @@ class HnmSpider(CrawlSpider):
             loader.add_xpath('salePrice', '//span[@class="price-value"]/text()')
         else:
             loader.add_xpath('price', '//span[@class="price-value"]/text()')
-            
+        
         loader.add_value('shopHost', self.name.lower())
         loader.add_value('url', response.url)
         loader.add_value('brand', self.name.lower())
         return loader.load_item()
+    
+    def closed(self, reason):
+        self.logger.info(reason)

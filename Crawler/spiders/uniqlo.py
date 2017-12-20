@@ -66,3 +66,6 @@ class UniqloSpider(CrawlSpider):
         loader.add_value('url', response.url)
         loader.add_value('brand', self.name.lower())
         return loader.load_item()
+    
+    def closed(self, reason):
+        self.logger.info(reason)
