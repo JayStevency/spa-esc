@@ -7,12 +7,15 @@
 import datetime
 import json
 import os
+import logging
 from scrapy.exceptions import DropItem
 from sqlalchemy.orm import sessionmaker
 from elasticsearch import Elasticsearch, helpers
 from Crawler.util.category.category_processing import Categorizing
 from Crawler.util.common import check_essential_element
 from models import Product, db_connect, create_deals_table
+
+logger = logging.getLogger()
 
 
 class CategoryPipeline(object):
@@ -32,6 +35,7 @@ class FilterPipeline(object):
             raise DropItem("Duplicate item found: %s" % item)
         else:
             self.item_set.add(check_item)
+        logger.info("Filtered item :", item)
         return item
 
 
@@ -49,7 +53,8 @@ class CrawlerPipeline(object):
             raise DropItem("Duplicate item found: %s" % item)
         else:
             product = Product(**item)
-            
+
+            logger.info("Saved item :", item)
             try:
                 if session.query(Product).filter_by(productNo=item.get('productNo'),
                                                     brand=item.get('brand')).first() is None:
@@ -86,6 +91,7 @@ class ESPipeline(object):
                 'productNo': item['productNo'],
                 'originalCategory': item['originalCategory']
             }}
-        
+
+        logger.info("ES Saved action :", action)
         helpers.bulk(self.es_client, [action])
         return item
