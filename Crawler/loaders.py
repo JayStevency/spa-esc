@@ -112,3 +112,16 @@ class HnmLoader(ItemLoader):
     
     detailImages_out = str
     description_out = str
+
+
+class HipHoperLoader(ItemLoader):
+    default_output_processor = TakeFirst()
+    
+    price_in = ExtractPrice()
+    originalSizeLabel_in = TakeUnique()
+    
+    originalSizeLabel_out = str
+    
+    detailImages_out = str
+    description_out = str
+    detailHtml_out = str
