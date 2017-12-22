@@ -21,9 +21,6 @@ class HnmSpider(CrawlSpider):
         'product-type=men_all&sort=stock&offset={}&page-size=100'
     ]
     
-    custom_settings = {
-        'ROBOTSTXT_OBEY': True
-    }
     
     rules = (
         Rule(LinkExtractor(allow=r'ko_kr\/productpage\.\d+\.html'), callback='parse_item'),
