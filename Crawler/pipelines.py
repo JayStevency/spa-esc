@@ -32,7 +32,7 @@ class FilterPipeline(object):
     def process_item(self, item, spider):
         check_item = (item.get('brand'), item.get('productNo'))
         if check_item in self.item_set:
-            raise DropItem("Duplicate item found: %s" % item)
+            raise DropItem("Over scraped Item: %s" % item)
         else:
             self.item_set.add(check_item)
         logger.info("Filtered item :", item)
@@ -50,7 +50,7 @@ class CrawlerPipeline(object):
         if check_essential_element(item):
             with open("logs/drop_file_%s.json" % datetime.datetime.today().strftime("%y-%m-%d"), 'a') as f:
                 f.write(json.dumps(dict(item), ensure_ascii=False) + '\r\n')
-            raise DropItem("Duplicate item found: %s" % item)
+            raise DropItem("Don't have essential field item: %s" % item)
         else:
             product = Product(**item)
 
