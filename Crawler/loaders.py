@@ -2,7 +2,7 @@ from scrapy.loader import ItemLoader
 from scrapy.loader.processors import TakeFirst, MapCompose
 from Crawler.util.handle_string import HandleString, ExtractPrice, AddHttpString, StringToList
 from w3lib.html import replace_entities, replace_escape_chars
-from Crawler.util.common import replace_useless_chars, TakeUnique
+from Crawler.util.common import replace_useless_chars, TakeUnique, replace_useless_chars
 
 
 class UniqloLoader(ItemLoader):
@@ -122,6 +122,18 @@ class HipHoperLoader(ItemLoader):
     
     originalSizeLabel_out = str
     
+    detailImages_out = str
+    description_out = str
+    detailHtml_out = str
+
+
+class SSFShopLoader(ItemLoader):
+    default_output_processor = TakeFirst()
+    
+    originalCategory_in = MapCompose(replace_useless_chars)
+    originalSizeLabel_out = str
+    
+    originalCategory_out = str
     detailImages_out = str
     description_out = str
     detailHtml_out = str
