@@ -30,6 +30,7 @@ class HandleString:
     @classmethod
     def extract_digit_from_price(cls, data):
         result = str.strip(data)
+        result = re.sub('\d+%', '', result)
         result = re.findall('\d', result)
         result = ''.join(result)
         return result
