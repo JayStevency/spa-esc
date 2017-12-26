@@ -18,7 +18,7 @@ NEWSPIDER_MODULE = 'Crawler.spiders'
 USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 
@@ -75,8 +75,7 @@ ITEM_PIPELINES = {
    'Crawler.pipelines.FilterPipeline': 100,
    'Crawler.pipelines.CategoryPipeline': 200,
    'Crawler.pipelines.CrawlerPipeline': 300,
-   # 'Crawler.pipelines.ESPipeline': 400,
-   
+   'Crawler.pipelines.ESPipeline': 400,
 }
 REACTOR_THREADPOOL_MAXSIZE = 20
 
