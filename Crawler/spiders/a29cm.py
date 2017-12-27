@@ -52,7 +52,7 @@ class A29cmSpider(scrapy.Spider):
             yield SplashRequest(url, callback=self.parse_paging, args={'wait': 10.0})
     
     def parse_paging(self, response):
-        limit = response.xpath('//div[@class="pagination"]/ul/li/a/@data-ic').extract()[-2]
+        limit = int(response.xpath('//div[@class="pagination"]/ul/li/a/@data-ic').extract()[-2])
         for i in range(1, limit):
             yield SplashRequest(response.url + "&iC={}".format(i), callback=self.parse_list, args={'wait': 3})
             
