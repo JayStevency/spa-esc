@@ -11,13 +11,13 @@ class A29cmSpider(scrapy.Spider):
     name = '29cm'
     allowed_domains = ['29cm.co.kr']
     start_urls = ['http://www.29cm.co.kr/shop/shop.asp?&selS=24&MCC=51',
-                  # 'http://www.29cm.co.kr/shop/shop.asp?&selS=24&MCC=52',
-                  # 'http://www.29cm.co.kr/shop/shop.asp?&selS=24&MCC=53',
-                  # 'http://www.29cm.co.kr/shop/shop.asp?&selS=24&MCC=54',
-                  # 'http://www.29cm.co.kr/shop/shop.asp?&selS=24&MCC=55',
-                  # 'http://www.29cm.co.kr/shop/shop.asp?&selS=24&MCC=56',
-                  # 'http://www.29cm.co.kr/shop/shop.asp?&selS=24&MCC=57',
-                  # 'http://www.29cm.co.kr/shop/shop.asp?&selS=24&MCC=58',
+                  'http://www.29cm.co.kr/shop/shop.asp?&selS=24&MCC=52',
+                  'http://www.29cm.co.kr/shop/shop.asp?&selS=24&MCC=53',
+                  'http://www.29cm.co.kr/shop/shop.asp?&selS=24&MCC=54',
+                  'http://www.29cm.co.kr/shop/shop.asp?&selS=24&MCC=55',
+                  'http://www.29cm.co.kr/shop/shop.asp?&selS=24&MCC=56',
+                  'http://www.29cm.co.kr/shop/shop.asp?&selS=24&MCC=57',
+                  'http://www.29cm.co.kr/shop/shop.asp?&selS=24&MCC=58',
                   ]
     
     item_fields = {
@@ -53,7 +53,7 @@ class A29cmSpider(scrapy.Spider):
     
     def parse_paging(self, response):
         limit = response.xpath('//div[@class="pagination"]/ul/li/a/@data-ic').extract()[-2]
-        for i in range(1, 3):
+        for i in range(1, limit):
             yield SplashRequest(response.url + "&iC={}".format(i), callback=self.parse_list, args={'wait': 3})
             
     def parse_list(self, response):
