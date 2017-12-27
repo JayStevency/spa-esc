@@ -10,7 +10,7 @@ class ExtractPrice(object):
 class AddHttpString(object):
     def __call__(self, values):
         for value in values:
-            return 'http:' + value
+            return value if 'http' in value else 'http:' + value
 
 
 class StringToList(object):
