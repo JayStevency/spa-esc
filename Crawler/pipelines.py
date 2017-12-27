@@ -53,7 +53,7 @@ class CrawlerPipeline(object):
             raise DropItem("Don't have essential field item: %s" % item)
         else:
             product = Product(**item)
-
+            
             logger.info("Saved item :", item)
             try:
                 if session.query(Product).filter_by(productNo=item.get('productNo'),
@@ -91,7 +91,7 @@ class ESPipeline(object):
                 'productNo': item['productNo'],
                 'originalCategory': item['originalCategory']
             }}
-
+        
         logger.info("ES Saved action :", action)
         helpers.bulk(self.es_client, [action])
         return item
