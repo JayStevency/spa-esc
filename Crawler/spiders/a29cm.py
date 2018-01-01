@@ -55,12 +55,12 @@ class A29cmSpider(scrapy.Spider):
         limit = int(response.xpath('//div[@class="pagination"]/ul/li/a/@data-ic').extract()[-2])
         for i in range(1, limit):
             yield SplashRequest(response.url + "&iC={}".format(i), callback=self.parse_list, args={'wait': 3})
-            
+    
     def parse_list(self, response):
         item_links = response.xpath('//a[@href[contains(.,"idx=")]]/@href').extract()
         for link in item_links:
-            yield SplashRequest('http://www.29cm.co.kr'+link, callback=self.parse_item, args={'wait': 3})
-            
+            yield SplashRequest('http://www.29cm.co.kr' + link, callback=self.parse_item, args={'wait': 3})
+    
     def parse_item(self, response):
         loader = A29CMLoader(item=Product(), response=response)
         for field, xpath in self.item_fields.items():
@@ -77,6 +77,6 @@ class A29cmSpider(scrapy.Spider):
         loader.add_value('url', response.url)
         
         return loader.load_item()
-        
-        
     
+    def closed(self, reason):
+        self.logger.info(reason)
