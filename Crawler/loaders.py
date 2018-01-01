@@ -1,6 +1,6 @@
 from scrapy.loader import ItemLoader
-from scrapy.loader.processors import TakeFirst, MapCompose, Compose
-from Crawler.util.handle_string import HandleString, ExtractPrice, AddHttpString, StringToList
+from scrapy.loader.processors import TakeFirst, MapCompose, Compose, Join
+from Crawler.util.handle_string import HandleString, ExtractPrice, AddHttpString, StringToList, RemoveEmptyString
 from w3lib.html import replace_entities, replace_escape_chars
 from Crawler.util.common import TakeUnique, replace_useless_chars
 
@@ -151,6 +151,21 @@ class A29CMLoader(ItemLoader):
     
     originalSizeLabel_out = str
     
+    originalCategory_out = str
+    detailImages_out = str
+    description_out = str
+    detailHtml_out = str
+
+
+class MujiLoader(ItemLoader):
+    default_output_processor = TakeFirst()
+    
+    price_in = Compose(Join(''))
+    salePrice_in = Compose(Join(''))
+    
+    title_out = Compose(Join(''))
+    originalSizeLabel_out = str
+
     originalCategory_out = str
     detailImages_out = str
     description_out = str
