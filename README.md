@@ -15,7 +15,7 @@ Fair에 필요한 상품 데이터를 브랜드 별로 크롤링 하는 시스�
 
 ##Set Environment variables
 
-1. For Mac OS
+###For Mac OS
 
 `~/.bash_profile` 파일에 다음과 같은 환경 변수 값 세팅 후 붙여넣기
 
@@ -28,7 +28,7 @@ Fair에 필요한 상품 데이터를 브랜드 별로 크롤링 하는 시스�
     export SPLASH_URL="<SPLASH_URL>"
     export ES_URL="<ES_URL>"
     
-2. For Ubuntu
+###For Ubuntu
 
 `/etc/environment` 파일에 다음과 같은 환경 변수 값 세팅 후 붙여넣기 
 
@@ -43,7 +43,7 @@ Fair에 필요한 상품 데이터를 브랜드 별로 크롤링 하는 시스�
 
 ##Install
 
-The quick way::
+The quick way:
 
     git clone git@bitbucket.org:jaemkor/crawler_fair.git
     cd crawler_fair
