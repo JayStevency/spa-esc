@@ -1,6 +1,6 @@
 from scrapy.loader import ItemLoader
 from scrapy.loader.processors import TakeFirst, MapCompose, Compose, Join
-from Crawler.util.handle_string import HandleString, ExtractPrice, AddHttpString, StringToList, RemoveEmptyString
+from Crawler.util.handle_string import HandleString, ExtractPrice, AddHttpString, StringToList
 from w3lib.html import replace_entities, replace_escape_chars
 from Crawler.util.common import TakeUnique, replace_useless_chars
 
