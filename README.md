@@ -10,7 +10,36 @@ Fair에 필요한 상품 데이터를 브랜드 별로 크롤링 하는 시스�
 * Works on Ubuntu, Mac OSX
 * Additional virtual environment Docker 17.09+ ce
 * Need to MySQL 5.5+ for RDS
+* Need to ElasticSearch 6.0+ for Search Engine
 
+
+##Set Environment variables
+
+1. For Mac OS
+
+`~/.bash_profile` 파일에 다음과 같은 환경 변수 값 세팅 후 붙여넣기
+
+    export DB_USERNAME="<DB_USERNAME>"
+    export DB_PORT="<DB_PORT>"
+    export DB_PASSWORD="<DB_PASSWORD>"
+    export DB_DATABASE="<DB_DATABASE>"
+    export DB_HOST="<DB_HOST>"
+    export DB_DIALECT="mysql"
+    export SPLASH_URL="<SPLASH_URL>"
+    export ES_URL="<ES_URL>"
+    
+2. For Ubuntu
+
+`/etc/environment` 파일에 다음과 같은 환경 변수 값 세팅 후 붙여넣기 
+
+    DB_USERNAME="<DB_USERNAME>"
+    DB_PORT="<DB_PORT>"
+    DB_PASSWORD="<DB_PASSWORD>"
+    DB_DATABASE="<DB_DATABASE>"
+    DB_HOST="<DB_HOST>"
+    DB_DIALECT="mysql"
+    SPLASH_URL="<SPLASH_URL>"
+    ES_URL="<ES_URL>"
 
 ##Install
 
