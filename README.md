@@ -59,7 +59,7 @@ The quick way:
 ### When do you want exec single crawler?
     
     cd <project root>
-    scrapy crawl <brand명>
+    scrapy crawl <brand_name>
 
 ### When do you want exec crawler system?
 
