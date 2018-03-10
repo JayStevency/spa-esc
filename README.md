@@ -2,7 +2,7 @@
 
 ##Overview
 
-Fair에 필요한 상품 데이터를 브랜드 별로 크롤링 하는 시스템
+SPA 브랜드 제품 정보 크롤링 및 검색 시스템
 
 ##Requirements
 
@@ -85,7 +85,6 @@ Note v(0.0.1) : Prototype scrapy system
 ##Contributing
 
 1. 각 계정별 dev branch 생성
-- ex> dev-jayu
 2. 코드 수정은 본인 dev branch 에 commit
 3. origin branch 에 커밋 사항 반영 
 4. develop branch 에 pull request
@@ -95,8 +94,3 @@ Note v(0.0.1) : Prototype scrapy system
 ##Code of Conduct
 
 PEP8를 준수 합니다.
-
-##Commercial Support
-
-이 시스템에 대한 문의 사항은 jayu에게 문의해 주세요
-> jay.yu@jaem.me
