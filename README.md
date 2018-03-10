@@ -1,10 +1,10 @@
-#Crawler_Fair
+# SPA-ESC(Elastic Search Crawler)
 
-##Overview
+## Overview
 
-SPA 브랜드 제품 정보 크롤링 및 검색 시스템
+This project is to collect SPA brands products for search engine
 
-##Requirements
+## Requirements
 
 * Python 3.5+
 * Works on Ubuntu, Mac OSX
@@ -13,11 +13,11 @@ SPA 브랜드 제품 정보 크롤링 및 검색 시스템
 * Need to ElasticSearch 6.0+ for Search Engine
 
 
-##Set Environment variables
+## Set Environment variables
 
-###For Mac OS
+### For Mac OS
 
-`~/.bash_profile` 파일에 다음과 같은 환경 변수 값 세팅 후 붙여넣기
+`~/.bash_profile` to set the following env variables on this file.
 
     export DB_USERNAME="<DB_USERNAME>"
     export DB_PORT="<DB_PORT>"
@@ -28,9 +28,9 @@ SPA 브랜드 제품 정보 크롤링 및 검색 시스템
     export SPLASH_URL="<SPLASH_URL>"
     export ES_URL="<ES_URL>"
     
-###For Ubuntu
+### For Ubuntu
 
-`/etc/environment` 파일에 다음과 같은 환경 변수 값 세팅 후 붙여넣기 
+`/etc/environment` to set the following env variables on this file. 
 
     DB_USERNAME="<DB_USERNAME>"
     DB_PORT="<DB_PORT>"
@@ -41,34 +41,32 @@ SPA 브랜드 제품 정보 크롤링 및 검색 시스템
     SPLASH_URL="<SPLASH_URL>"
     ES_URL="<ES_URL>"
 
-##Install
+## Install
 
 The quick way:
 
-    git clone git@bitbucket.org:jaemkor/crawler_fair.git
-    cd crawler_fair
+    git clone https://github.com/Jaystevency/spa-esc.git
+    cd spa-esc
     pip install -r requirements.txt
 
-##How to run?
+## How to run?
 
-###Docker 실행 
+### Docker exec for splash 
 
     docker pull scrapinghub/splash
     docker run -dit -p 8050:8050 scrapinghub/splash
     
-###단일 크롤러 실행 시
+### When do you want exec single crawler?
     
     cd <project root>
     scrapy crawl <brand명>
 
-###크롤러 시스템 실행 시
+### When do you want exec crawler system?
 
     cd <dir executed>
     nohub scarpyd &
     
-크롤러 시스템 실행 시 크롤러 동작은 api 요청으로 실행 가능 합니다. 
-
-자세한 사항은 아래 scrapyd api 문서를 참고하세요
+### Reference 
 
 Document scrapy cli at: https://doc.scrapy.org/en/latest/topics/commands.html
 
@@ -76,21 +74,21 @@ Document scrapyd cli at: https://scrapyd.readthedocs.io/en/latest/overview.html#
 
 Document scrapyd api at: https://scrapyd.readthedocs.io/en/latest/api.html
 
-##Releases
+## Releases
 
 Note v(0.0.2) : Connected to ES System
 
 Note v(0.0.1) : Prototype scrapy system
 
-##Contributing
+## How to Contribute?
 
-1. 각 계정별 dev branch 생성
-2. 코드 수정은 본인 dev branch 에 commit
-3. origin branch 에 커밋 사항 반영 
-4. develop branch 에 pull request
-5. develop 단계 테스트 거친 후 release 로 통합
-6. version 업 한 후 master 로 통합
+1. create dev branch
+2. commit to one's dev branch
+3. push to origin one's branch  
+4. pull request to develop branch
+5. after test, integrate develop on release
+6. up to version and integrate release on master
 
 ##Code of Conduct
 
-PEP8를 준수 합니다.
+PEP8
